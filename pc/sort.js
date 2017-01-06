@@ -2,7 +2,7 @@
  * WIP
  * Simple directive for sorting objects with dragging
  */
-import createEvent from './_create-event'
+import createEvent from '../_create-event'
 
 export default {
   name: 'sort',
