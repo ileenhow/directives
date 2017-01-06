@@ -1,22 +1,17 @@
 /**
  * Simple directive for dragging events
  */
-import createEvent from './_create-event'
+import createEvent from '../_create-event'
 
 export default {
   name: 'drag',
   bind (el, { value, modifiers }) {
     let startPoint = null
     let direction
-    el.addEventListener('touchstart', el._drag_touchstart = e => {
-      if (e.touches && e.touches.length === 1) {
-        startPoint = {
-          pageX: e.touches[0].pageX,
-          pageY: e.touches[0].pageY
-        }
-      } else {
-        startPoint = null
-        return
+    el.addEventListener('mousedown', el._drag_mousedown = e => {
+      startPoint = {
+        pageX: e.pageX,
+        pageY: e.pageY
       }
 
       const dragStart = createEvent('dragstart', true, { originalEvent: e })
@@ -28,15 +23,15 @@ export default {
 
       const doc = el.ownerDocument
       // 绑定到 document
-      doc.addEventListener('touchmove', el._drag_touchmove = e => {
+      doc.addEventListener('mousemove', el._drag_mousemove = e => {
         if (!startPoint) {
           return
         }
 
-        // set drag direction's value after touchstart
+        // set drag direction's value after mousedown
         // and never change it until touchend
         if (!direction) {
-          direction = isHorizontal(e.touches[0], startPoint) ? 'horizontal' : 'vertical'
+          direction = isHorizontal(e, startPoint) ? 'horizontal' : 'vertical'
         }
 
         // don't dispatch drag event when modifiers don't match drag direction
@@ -47,9 +42,9 @@ export default {
         el.dispatchEvent(createEvent('drag', true, { originalEvent: e }))
       })
       // 绑定到 document
-      doc.addEventListener('touchend', el._drag_touchend = e => {
-        doc.removeEventListener('touchmove', el._drag_touchmove)
-        doc.removeEventListener('touchend', el._drag_touchend)
+      doc.addEventListener('mouseup', el._drag_mouseup = e => {
+        doc.removeEventListener('mousemove', el._drag_mousemove)
+        doc.removeEventListener('mouseup', el._drag_mouseup)
         if (direction) {
           direction = null
         }
@@ -61,10 +56,10 @@ export default {
     })
   },
   unbind (el) {
-    el.removeEventListener('touchstart', el._drag_touchstart)
+    el.removeEventListener('mousedown', el._drag_mousedown)
     const doc = el.ownerDocument
-    doc.removeEventListener('touchmove', el._drag_touchmove)
-    doc.removeEventListener('touchend', el._drag_touchend)
+    doc.removeEventListener('mousemove', el._drag_mousemove)
+    doc.removeEventListener('mouseup', el._drag_mouseup)
   }
 }
 

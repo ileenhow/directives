@@ -1,5 +1,5 @@
 export default (name, bubbles, mixins = {}) => {
-  const tapEvent = document.createEvent('HTMLEvents')
-  tapEvent.initEvent(name, bubbles, true)
-  return Object.assign(tapEvent, mixins)
+  const e = document.createEvent('HTMLEvents')
+  e.initEvent(name, bubbles, true)
+  return Object.assign(e, mixins)
 }
