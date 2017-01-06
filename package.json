@@ -1,0 +1,29 @@
+{
+  "name": "directives",
+  "version": "0.0.1",
+  "description": "Directives for PLATO",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --max-warnings 10 ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crossjs/directives.git"
+  },
+  "keywords": [
+    "tap",
+    "drag",
+    "sort",
+    "directives"
+  ],
+  "author": "crossjs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/crossjs/directives/issues"
+  },
+  "homepage": "https://github.com/crossjs/directives",
+  "devDependencies": {
+    "eslint": "3.9.0",
+    "eslint-config-plato": "^0.0.3"
+  }
+}
