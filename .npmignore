@@ -2,4 +2,6 @@
 *.log
 *.out
 
+coverage
 node_modules
+test
