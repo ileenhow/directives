@@ -1,90 +1,28 @@
 {
-  "_args": [
-    [
-      {
-        "raw": "directives@github:crossjs/directives",
-        "scope": null,
-        "escapedName": "directives",
-        "name": "directives",
-        "rawSpec": "github:crossjs/directives",
-        "spec": "github:crossjs/directives",
-        "type": "hosted",
-        "hosted": {
-          "type": "github",
-          "ssh": "git@github.com:crossjs/directives.git",
-          "sshUrl": "git+ssh://git@github.com/crossjs/directives.git",
-          "httpsUrl": "git+https://github.com/crossjs/directives.git",
-          "gitUrl": "git://github.com/crossjs/directives.git",
-          "shortcut": "github:crossjs/directives",
-          "directUrl": "https://raw.githubusercontent.com/crossjs/directives/master/package.json"
-        }
-      },
-      "C:\\plato"
-    ]
-  ],
-  "_from": "crossjs/directives",
-  "_id": "directives@0.0.1",
-  "_inCache": true,
-  "_location": "/directives",
-  "_phantomChildren": {},
-  "_requested": {
-    "raw": "directives@github:crossjs/directives",
-    "scope": null,
-    "escapedName": "directives",
-    "name": "directives",
-    "rawSpec": "github:crossjs/directives",
-    "spec": "github:crossjs/directives",
-    "type": "hosted",
-    "hosted": {
-      "type": "github",
-      "ssh": "git@github.com:crossjs/directives.git",
-      "sshUrl": "git+ssh://git@github.com/crossjs/directives.git",
-      "httpsUrl": "git+https://github.com/crossjs/directives.git",
-      "gitUrl": "git://github.com/crossjs/directives.git",
-      "shortcut": "github:crossjs/directives",
-      "directUrl": "https://raw.githubusercontent.com/crossjs/directives/master/package.json"
-    }
-  },
-  "_requiredBy": [
-    "/",
-    "/components"
-  ],
-  "_resolved": "git://github.com/crossjs/directives.git#06c982237859eb02819c21c34e13b396bd10e26c",
-  "_shasum": "7b59c8a2f495e4ce8e33c94e0edb041c18186740",
-  "_shrinkwrap": null,
-  "_spec": "directives@github:crossjs/directives",
-  "_where": "C:\\plato",
-  "author": {
-    "name": "crossjs"
-  },
-  "bugs": {
-    "url": "https://github.com/crossjs/directives/issues"
-  },
-  "dependencies": {},
-  "description": "Directives for PLATO",
-  "devDependencies": {
-    "eslint": "3.9.0",
-    "eslint-config-plato": "^0.0.3"
-  },
-  "gitHead": "06c982237859eb02819c21c34e13b396bd10e26c",
-  "homepage": "https://github.com/crossjs/directives",
-  "keywords": [
-    "tap",
-    "drag",
-    "sort",
-    "directives"
-  ],
-  "license": "MIT",
-  "main": "index.js",
   "name": "directives",
-  "optionalDependencies": {},
-  "readme": "ERROR: No README data found!",
+  "version": "0.0.1",
+  "description": "Directives for PLATO",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint --max-warnings 10 ."
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/crossjs/directives.git"
   },
-  "scripts": {
-    "lint": "eslint --max-warnings 10 ."
+  "keywords": [
+    "plato",
+    "vue",
+    "directives"
+  ],
+  "author": "crossjs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/crossjs/directives/issues"
   },
-  "version": "0.0.1"
+  "homepage": "https://github.com/crossjs/directives",
+  "devDependencies": {
+    "eslint": "^3.12.2",
+    "eslint-config-plato": "^0.0.3"
+  }
 }
