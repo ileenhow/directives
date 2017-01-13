@@ -1,11 +1,35 @@
 {
-  "presets": [
-    "es2015",
-    "stage-0"
-  ],
-  "plugins": [
-    "add-module-exports",
-    ["__coverage__", { "ignore": "test/" }]
-  ],
-  "comments": false
+  "env": {
+    "development": {
+      "presets": [
+        "es2015",
+        "stage-0"
+      ],
+      "plugins": [
+        "add-module-exports"
+      ],
+      "comments": false
+    },
+    "test": {
+      "presets": [
+        "es2015",
+        "stage-0"
+      ],
+      "plugins": [
+        "add-module-exports",
+        "istanbul"
+      ],
+      "comments": false
+    },
+    "production": {
+      "presets": [
+        "es2015",
+        "stage-0"
+      ],
+      "plugins": [
+        "add-module-exports"
+      ],
+      "comments": false
+    }
+  }
 }
