@@ -5,10 +5,13 @@ import createEvent from './_create-event'
 
 export default {
   name: 'drag',
+
   bind (el, { value, modifiers }) {
     let startPoint = null
     let direction
+
     el.addEventListener('touchstart', el._drag_touchstart = e => {
+      // 仅允许单点触摸
       if (e.touches && e.touches.length === 1) {
         startPoint = {
           pageX: e.touches[0].pageX,
@@ -27,6 +30,7 @@ export default {
       }
 
       const doc = el.ownerDocument
+
       // 绑定到 document
       doc.addEventListener('touchmove', el._drag_touchmove = e => {
         if (!startPoint) {
@@ -46,24 +50,45 @@ export default {
         }
         el.dispatchEvent(createEvent('drag', true, { originalEvent: e }))
       })
+
       // 绑定到 document
       doc.addEventListener('touchend', el._drag_touchend = e => {
         doc.removeEventListener('touchmove', el._drag_touchmove)
+        doc.removeEventListener('touchcancel', el._drag_touchcancel)
         doc.removeEventListener('touchend', el._drag_touchend)
+
         if (direction) {
           direction = null
         }
+
         if (startPoint) {
           startPoint = null
           el.dispatchEvent(createEvent('dragend', true, { originalEvent: e }))
         }
       })
+
+      // 绑定到 document
+      doc.addEventListener('touchcancel', el._drag_touchcancel = e => {
+        doc.removeEventListener('touchmove', el._drag_touchmove)
+        doc.removeEventListener('touchcancel', el._drag_touchcancel)
+        doc.removeEventListener('touchend', el._drag_touchend)
+
+        if (direction) {
+          direction = null
+        }
+
+        if (startPoint) {
+          startPoint = null
+        }
+      })
     })
   },
+
   unbind (el) {
     el.removeEventListener('touchstart', el._drag_touchstart)
     const doc = el.ownerDocument
     doc.removeEventListener('touchmove', el._drag_touchmove)
+    doc.removeEventListener('touchcancel', el._drag_touchcancel)
     doc.removeEventListener('touchend', el._drag_touchend)
   }
 }

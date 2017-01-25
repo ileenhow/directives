@@ -47,6 +47,35 @@ describe('tap', () => {
     triggerTouchEvents(vm.$el, 'touchend')
   })
 
+  it('should bubble tap event', done => {
+    vm = new Vue({
+      el,
+      template: '<div @tap="onTap"><div v-tap></div></div>',
+      methods: {
+        onTap () {
+          assert.ok(Date.now() - start < 300, 'should NOT have delay')
+          done()
+        }
+      }
+    })
+
+    const start = Date.now()
+
+    triggerTouchEvents(vm.$el.children[0], 'touchstart', e => {
+      e.touches = [{
+        pageX: 0,
+        pageY: 0
+      }]
+    })
+    triggerTouchEvents(vm.$el.children[0], 'touchmove', e => {
+      e.touches = [{
+        pageX: threshold - 1,
+        pageY: 0
+      }]
+    })
+    triggerTouchEvents(vm.$el.children[0], 'touchend')
+  })
+
   it('should NOT dispatch tap event', done => {
     vm = new Vue({
       el,
@@ -65,6 +94,7 @@ describe('tap', () => {
       }]
     })
     triggerTouchEvents(vm.$el, 'touchmove', e => {
+      // moving out of range
       e.touches = [{
         pageX: threshold,
         pageY: threshold
