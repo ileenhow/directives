@@ -38,14 +38,6 @@ export default {
           if (startPoint) {
             startPoint = null
 
-            if (modifiers.prevent) {
-              e.preventDefault()
-            }
-
-            if (modifiers.stop) {
-              e.stopPropagation()
-            }
-
             // dispatch a tap event
             const tapEvent = createEvent('tap', !modifiers.capture, { originalEvent: e })
 

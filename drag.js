@@ -22,7 +22,7 @@ export default {
         return
       }
 
-      const dragStart = createEvent('dragstart', true, { originalEvent: e })
+      const dragStart = createEvent('dragstart', !modifiers.capture, { originalEvent: e })
       el.dispatchEvent(dragStart)
 
       if (dragStart.defaultPrevented) {
@@ -31,7 +31,7 @@ export default {
 
       const doc = el.ownerDocument
 
-      // 绑定到 document
+      // 移动
       doc.addEventListener('touchmove', el._drag_touchmove = e => {
         if (!startPoint) {
           return
@@ -43,15 +43,18 @@ export default {
           direction = isHorizontal(e.touches[0], startPoint) ? 'horizontal' : 'vertical'
         }
 
+        const { horizontal, vertical } = modifiers
+
         // don't dispatch drag event when modifiers don't match drag direction
-        if ((modifiers.horizontal && !modifiers.vertical && direction === 'vertical') ||
-            (modifiers.vertical && !modifiers.horizontal && direction === 'horizontal')) {
+        if ((horizontal && !vertical && direction === 'vertical') ||
+            (vertical && !horizontal && direction === 'horizontal')) {
           return
         }
-        el.dispatchEvent(createEvent('drag', true, { originalEvent: e }))
+
+        el.dispatchEvent(createEvent('drag', !modifiers.capture, { originalEvent: e }))
       })
 
-      // 绑定到 document
+      // 完成
       doc.addEventListener('touchend', el._drag_touchend = e => {
         doc.removeEventListener('touchmove', el._drag_touchmove)
         doc.removeEventListener('touchcancel', el._drag_touchcancel)
@@ -63,24 +66,12 @@ export default {
 
         if (startPoint) {
           startPoint = null
-          el.dispatchEvent(createEvent('dragend', true, { originalEvent: e }))
+          el.dispatchEvent(createEvent('dragend', !modifiers.capture, { originalEvent: e }))
         }
       })
 
-      // 绑定到 document
-      doc.addEventListener('touchcancel', el._drag_touchcancel = e => {
-        doc.removeEventListener('touchmove', el._drag_touchmove)
-        doc.removeEventListener('touchcancel', el._drag_touchcancel)
-        doc.removeEventListener('touchend', el._drag_touchend)
-
-        if (direction) {
-          direction = null
-        }
-
-        if (startPoint) {
-          startPoint = null
-        }
-      })
+      // 取消
+      doc.addEventListener('touchcancel', el._drag_touchend)
     })
   },
 
@@ -88,7 +79,7 @@ export default {
     el.removeEventListener('touchstart', el._drag_touchstart)
     const doc = el.ownerDocument
     doc.removeEventListener('touchmove', el._drag_touchmove)
-    doc.removeEventListener('touchcancel', el._drag_touchcancel)
+    doc.removeEventListener('touchcancel', el._drag_touchend)
     doc.removeEventListener('touchend', el._drag_touchend)
   }
 }

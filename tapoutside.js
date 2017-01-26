@@ -7,10 +7,12 @@ import createEvent from './_create-event'
 export default {
   name: 'tapoutside',
 
-  bind (el) {
+  bind (el, { modifiers }) {
     el.ownerDocument.addEventListener('tap', el._tapoutside_tap = e => {
-      if (!el.contains(e.target)) {
-        el.dispatchEvent(createEvent('tapoutside', { originalEvent: e }))
+      // if e.target exists in dom tree,
+      // then judge whether it is contained by el
+      if (el.ownerDocument.contains(e.target) && !el.contains(e.target)) {
+        el.dispatchEvent(createEvent('tapoutside', !modifiers.capture, { originalEvent: e }))
       }
     })
   },

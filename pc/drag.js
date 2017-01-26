@@ -1,7 +1,7 @@
 /**
  * Simple directive for dragging events
  */
-import createEvent from '../_create-event'
+import createEvent from './_create-event'
 
 export default {
   name: 'drag',
