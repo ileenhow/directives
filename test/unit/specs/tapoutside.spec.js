@@ -24,7 +24,7 @@ describe('tapoutside', () => {
       template: '<div><div v-tapoutside @tapoutside="onTapOutside" v-tap @tap="onTap"></div></div>',
       methods: {
         onTap () {
-          assert(false, 'shoudl NOT run')
+          assert(false, 'should NOT be called')
         },
         onTapOutside () {
           assert(true, '')
