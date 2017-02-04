@@ -47,17 +47,18 @@ describe('tap', () => {
     triggerTouchEvents(vm.$el, 'touchend')
   })
 
-  it('should bubble tap event', done => {
+  it('should NOT bubble tap event', done => {
     vm = new Vue({
       el,
       template: '<div @tap="onTap"><div v-tap></div></div>',
       methods: {
         onTap () {
-          assert(true, '')
-          done()
+          assert(false, '')
         }
       }
     })
+
+    setTimeout(done, 50)
 
     triggerTouchEvents(vm.$el.children[0], 'touchstart', e => {
       e.touches = [{

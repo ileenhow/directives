@@ -1,4 +1,3 @@
-export default (name, bubbles, mixins = {}) => {
-  const e = new Event(name, { bubbles, cancelable: true })
-  return Object.assign(e, mixins)
+export default (name, options, mixins) => {
+  return Object.assign(new Event(name, options), mixins)
 }

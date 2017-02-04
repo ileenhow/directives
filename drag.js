@@ -22,7 +22,7 @@ export default {
         return
       }
 
-      const dragStart = createEvent('dragstart', !modifiers.capture, { originalEvent: e })
+      const dragStart = createEvent('dragstart', null, { originalEvent: e })
       el.dispatchEvent(dragStart)
 
       if (dragStart.defaultPrevented) {
@@ -51,7 +51,7 @@ export default {
           return
         }
 
-        el.dispatchEvent(createEvent('drag', !modifiers.capture, { originalEvent: e }))
+        el.dispatchEvent(createEvent('drag', null, { originalEvent: e }))
       })
 
       // 完成
@@ -66,7 +66,7 @@ export default {
 
         if (startPoint) {
           startPoint = null
-          el.dispatchEvent(createEvent('dragend', !modifiers.capture, { originalEvent: e }))
+          el.dispatchEvent(createEvent('dragend', null, { originalEvent: e }))
         }
       })
 

@@ -39,7 +39,7 @@ export default {
             startPoint = null
 
             // dispatch a tap event
-            const tapEvent = createEvent('tap', !modifiers.capture, { originalEvent: e })
+            const tapEvent = createEvent('tap', null, { originalEvent: e })
 
             if (modifiers.delay) {
               // useful for hiding el after tap that has a link inside
